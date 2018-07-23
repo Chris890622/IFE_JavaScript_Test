@@ -23,11 +23,11 @@
         		para.textContent = binary;
 
                 if(bit < binary.length){
-                    alert(binary);
+                    para.textContent = binary;
                 } else if(decNumber == bit){
-                    var str = "0000000";
-                    binary = str.slice(0,2) + binary;
-                    alert(binary);
+                    var str = bit - binary.length;
+                    var a = new Array(str + 1);
+                    para.innerHTML = a.join("0") + binary;
                 }
 
         	} else {
