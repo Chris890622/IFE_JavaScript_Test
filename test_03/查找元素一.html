@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">    
+    <title>IFE ECMAScript</title>
+</head>
+<body>        
+    <div id="wrapper">
+        <div id="news-top" class="section">
+            <h3>Some title</h3>
+            <div class="content">
+                <ul>
+                    <li><span>HTML</span><a href="">Some Link1</a></li>
+                    <li><span>JS</span><a class="active" href="">Some Link2</a></li>
+                    <li><span>CSS</span><a href="">Some Link3</a></li>
+                    <li><span>JS</span><a href="">Some Link4</a></li>
+                </ul>
+            </div>
+            <img src="">
+            <p class="">Some Text</p>
+        </div>
+        <div id="news-normal" class="section">
+            <h3>Some title</h3>
+            <div class="content">
+                <ul>
+                    <li><span>HTML</span><a href="">Some Link1</a></li>
+                    <li><span>HTML</span><a href="">Some Link2</a></li>
+                    <li><span>JS</span><a class="active" href="#">Some Link3</a></li>
+                    <li><span>CSS</span><a href="">Some Link4</a></li>
+                </ul>
+            </div>
+            <img src="">
+            <p class="">Some Text</p>
+        </div>      
+    </div>
+    <script>
+
+	    function getAllListItem() {
+	        var lis = document.getElementsByTagName("li");
+	        for(var i=0; i<lis.length; i++){
+	        	console.log(lis[i]);
+	        }
+	    }
+
+	    function findAllHtmlSpanInOneSection(sectionId) {
+	        var sectionId = document.getElementById(sectionId);
+	        var spans = sectionId.getElementsByTagName("span");
+	        for(var i=0;i<spans.length; i++){
+	        	if(spans[i].innerHTML == "HTML"){
+	        		console.log(spans[i]);
+	        	}	        	
+	        }
+	    }
+
+	    function findListItem(sectionId, spanCont) {
+	        var sectionId = document.getElementById(sectionId); 
+	        var spans = sectionId.getElementsByTagName("span");
+	        for(var i=0; i<spans.length; i++){
+	        	if(spans[i].textContent == spanCont){
+	        		console.log(spans[i].parentNode);
+	        	}
+	        }
+	    }
+
+	    function getActiveLinkContent(sectionId) {
+	        var sectionId = document.getElementById(sectionId);
+	        var links = sectionId.getElementsByTagName("a");
+	        for(var i=0; i<links.length; i++){
+	        	if(links[i].getAttribute("class") == "active"){
+	        		console.log(links[i].innerHTML);
+	        	}
+	        }
+	        
+	    }
+
+
+	    getAllListItem();
+	    findAllHtmlSpanInOneSection("news-normal");
+	    findListItem("news-top", "JS");
+	    getActiveLinkContent("news-normal");
+
+    </script>
+</body>
+</html>
