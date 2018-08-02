@@ -1,0 +1,65 @@
+hr {
+	margin: 20px 0;
+}
+
+#choiceTitle label {
+	display: inline-block;
+	width: 100px;
+}
+
+#choiceTitle {
+	margin-bottom: 10px;
+}
+
+#company-select {
+	margin-left: 10px;
+}
+		
+select {
+	display: none;
+}
+
+.palette {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+        
+.palette li {
+    width: 40px;
+    height: 40px;
+    border: 1px solid #000;
+    cursor: pointer;
+}
+
+#part4 {
+	width: 100%;
+	height: 500px;
+	position: relative;
+}
+
+#part4 h2 {
+	position: absolute;
+	top: 10%;
+	left: 40px;
+	color: #000;
+	font-size: 60px;
+}
+
+#part4 p {
+	position: absolute;
+	top: 10%;
+	left: 40px;
+	font-size: 25px;
+	color: #666;
+	margin-top: 260px;
+}
+
+#erikface {
+	width: 480px;
+	height: 480px;
+	background-image: url("images/erik_ce204002.jpg");
+	position: absolute;
+	top: 0;
+	right: 0;
+}
