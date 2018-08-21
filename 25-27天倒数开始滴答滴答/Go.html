@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		function Go(){
+			console.log("Go");
+		}
+
+		function GoSteps(n){
+			if(n>0){
+				var num = parseInt(n);
+				while(num--){
+					Go();
+				}
+			} else if(n<0 || n === 0){
+				console.log("数值应该大于0！");
+			} else if(arguments.length === 0){
+				console.log("参数不能为空！");
+			} else if(n === null || n=== false || isNaN(n)){
+				console.log("请输入数值！");
+			}
+		}
+
+		GoSteps(10);
+		GoSteps(1);
+		GoSteps();
+		GoSteps(0);
+		GoSteps(-1);
+		GoSteps(1.4);
+		GoSteps(1.6);		
+		GoSteps(-1);
+		GoSteps(null);
+		GoSteps(false);
+		GoSteps(NaN);
+		GoSteps("Test");
+
+
+	</script>
+</body>
+</html>

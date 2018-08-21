@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>date</title>
+</head>
+<body>
+	<div id="currentTime"></div>
+	<br />
+	<select id="year-select"></select>
+	<select id="month-select"></select>
+	<select id="day-select"></select>
+	<select id="hour-select"></select>
+	<select id="minite-select"></select>
+	<select id="second-select"></select>
+
+	<p id="result-wrapper">现在距离 2001年1月1日星期X HH:MM:SS 还有 X 天 X 小时 X 分 X 秒</p>
+	<script>
+		// 设置当前时间
+		var currentTime = document.getElementById("currentTime");
+		function startTime(){
+			var currentDate = new Date();
+			var yy = currentDate.getFullYear();
+			var mm = currentDate.getMonth()+1;
+			var dd = currentDate.getDate();
+			mm = checkTime(mm);
+			dd = checkTime(dd);
+			var weekday = ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
+			var day = weekday[currentDate.getDay()];
+			var hh = currentDate.getHours();
+			var min = currentDate.getMinutes();
+			var sec = currentDate.getSeconds();
+			hh = checkTime(hh);
+			min = checkTime(min);
+			sec = checkTime(sec);
+			currentTime.innerHTML = "当前时间：" + yy + "-" + mm + "-" + dd + " " + day + " " + hh + ":" + min + ":" + sec;
+			setTimeout('startTime()',1000);
+		}
+		startTime();
+
+		// 小于10，补齐前置0
+		function checkTime(i){
+			if(i<10){
+				i = "0" + i;
+			}
+			return i;
+		}
+
+		//设置按钮
+		var yearSelect = document.getElementById("year-select");
+		var monthSelect = document.getElementById("month-select");
+		var daySelect = document.getElementById("day-select");
+		var hourSelect = document.getElementById("hour-select");
+		var minitSelect = document.getElementById("minite-select");
+		var secondSelect = document.getElementById("second-select");
+		function someSelect(initial, num, select){
+			for(var i = initial; i<num; i++){
+				var options = document.createElement("option");
+				options.setAttribute("value",i);
+				options.innerHTML = checkTime(i);
+				select.appendChild(options);
+			}
+		}
+		someSelect(2000, 2033, yearSelect);
+		someSelect(1, 13, monthSelect);
+		someSelect(1, 32, daySelect);
+		someSelect(0, 24, hourSelect);
+		someSelect(0, 60, minitSelect);
+		someSelect(0, 60, secondSelect);
+
+		// 判断闰年
+		function isLeepYear(){
+			var years = Number(yearSelect.value);
+			if(years % 400 == 0 ||(years % 4 ==0 && years % 100 != 0)){
+				return true;
+			} else {
+				return false;
+			}
+		}
+
+		// 判断天数
+		monthSelect.onchange = function(){
+			var chioce = monthSelect.value;
+			var days = 31;
+			if(chioce == 2){
+				if(isLeepYear() == true){
+					days = 29;
+				} else {
+					days = 28;
+				}
+			} else if(chioce ==4 || chioce ==6 || chioce ==9 || chioce ==11){
+				days = 30;
+			}
+			createCalendar(days,chioce);
+		}
+
+		function createCalendar(days,chioce){
+			daySelect.innerHTML = "";
+			for(var i=1; i<=days; i++){
+				var options = document.createElement("option");
+				options.setAttribute("value",i);
+				options.innerHTML = checkTime(i);
+				daySelect.appendChild(options);
+			}
+		}
+		createCalendar(31,1);
+
+		// 选择日期对应显示
+		var para = document.getElementById("result-wrapper");
+
+		function myDate(){
+			var today = new Date();
+			var yy = today.getFullYear();
+			var mm = today.getMonth()+1;
+			var dd = today.getDate();
+			var hh = today.getHours();
+			var min = today.getMinutes();
+			var sec = today.getSeconds();
+
+			var anotherDay = new Date(yearSelect.value, monthSelect.value, daySelect.value, hourSelect.value, minitSelect.value, secondSelect.value);
+			var weekDay = ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
+			var weekDate =  weekDay[anotherDay.getDay()];
+			var dayDiff;
+			var text;
+			if(today.getTime() > anotherDay.getTime()){
+				dayDiff = today.getTime() - anotherDay.getTime();
+				text = "已经过去";
+			} else {
+				dayDiff = anotherDay.getTime() - today.getTime();
+				text = "还有";
+			}
+			var day = Math.floor(dayDiff/(24*3600*1000));
+			var leave1 = Math.floor(dayDiff%(24*3600*1000));
+			var hours = Math.floor(leave1/(3600*1000));
+			var leave2 = Math.floor(leave1%(3600*1000));
+			var minutes = Math.floor(leave2/(60*1000));
+			var leave3 = Math.floor(leave2%(60*1000));
+			var leave3 = Math.floor(leave2%(60*1000));
+			var seconds = Math.floor(leave3/1000);
+			day = checkTime(day);
+			hours = checkTime(hours);
+			minutes = checkTime(minutes);
+			seconds = checkTime(seconds);
+
+			para.innerHTML = "现在距离 "+ yearSelect.value + "年" + monthSelect.value + "月" + daySelect.value +"日 " + weekDate + " " +hourSelect.value + ":" + minitSelect.value + ":" + secondSelect.value + " " + text + " " + day + "天" + hours + "时" + minutes + "分" + seconds + "秒";
+			setTimeout("myDate()",1000);
+		}
+		myDate();
+
+	</script>
+</body>
+</html>

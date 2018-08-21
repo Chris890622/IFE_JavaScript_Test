@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<p></p>
+	<script>
+		var para = document.querySelector("p");
+		var myDate = new Date();
+
+		function newdate(show){
+			var yy = show.getFullYear();
+			var mm = show.getMonth() +1;
+			var dd = show.getDate();
+		    if(mm<10){
+		    	mm = "0" + mm;
+		    }
+		    if(dd<10){
+		    	dd = "0" + dd;
+		    }
+		    var result = [yy, mm, dd];
+		    return result.join("-"); 
+		}
+
+		function week(arg){
+			var weekday = [
+				"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"
+			];
+			var today = weekday[arg.getDay()];
+			return today;
+		}
+
+		function time(thisTime){
+			var hh = thisTime.getHours();
+			var min = thisTime.getMinutes();
+			var sec = thisTime.getSeconds();
+
+			if(hh<10){
+				hh = "0" + hh;
+			}
+
+			if(min<10){
+				min = "0" + min;
+			}
+
+			if(sec<10){
+				sec = "0" + sec;
+			}
+
+			var result2 = [hh, min, sec];
+			return result2.join(":");
+		}
+
+		var hh = myDate.getHours();
+		var h;
+		if(hh<12){
+			h = "AM";
+		} else if(hh>12){
+			h = "PM";
+		}
+
+		para.innerHTML = newdate(myDate) + " " + week(myDate) + " " + time(myDate) +" " + h;
+
+	</script>
+</body>
+</html>
